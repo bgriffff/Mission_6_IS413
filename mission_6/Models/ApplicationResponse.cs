@@ -4,6 +4,7 @@ namespace mission_6.Models
 {
     public class ApplicationResponse
     {
+        //this is the code
         [Required]
         public string Category { get; set; }
 
