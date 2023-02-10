@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Enter Movie";
+}
+
+@model ApplicationResponse
+
+<div class="text-center">
+    <h1 class="display-4">Enter Movie</h1>
+    <form method="post">
+        <label asp-for="Category">Category: </label>
+        <select asp-for="Category">
+            <option value="Action/Adventure">Action/Adventure</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Family">Family</option>
+            <option value="Horror/Suspense">Horror/Suspense</option>
+            <option value="Miscellaneous">Miscellaneous</option>
+            <option value="Television">Television</option>
+            <option value="VHS">VHS</option>
+        </select>
+        <br />
+
+        <label asp-for="Title">Title: </label>
+        <input asp-for="Title" />
+        <br />
+
+        <label asp-for="Year">Year: </label>
+        <input asp-for="Year" />
+        <br />
+
+        <label asp-for="Director">Director: </label>
+        <input asp-for="Director" />
+        <br />
+
+        <label asp-for="Edited">Edited: </label>
+        <select asp-for="Edited">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+        <br />
+
+        <label asp-for="LentTo">Lent To: </label>
+        <textarea asp-for="LentTo"></textarea>
+        <br />
+
+        <label asp-for="Notes">Notes: </label>
+        <textarea asp-for="Notes"></textarea>
+        <br />
+
+
+
+        <button type="submit">Submit Application</button>
+
+        <div asp-validation-summary="All"></div>
+
+    </form>
+</div>
