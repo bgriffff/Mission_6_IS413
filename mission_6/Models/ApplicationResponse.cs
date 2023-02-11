@@ -5,6 +5,10 @@ namespace mission_6.Models
     public class ApplicationResponse
     {
         //this is the code
+        [Key]
+        [Required]
+        public int MovieId { get; set; }
+
         [Required]
         public string Category { get; set; }
 

@@ -13,9 +13,13 @@ namespace mission_6.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private MovieApplicationContext MovieContext { get; set; }
+
+        public HomeController(ILogger<HomeController> logger, MovieApplicationContext Movie)
         {
             _logger = logger;
+            MovieContext= Movie;
+
         }
 
         public IActionResult Index()
@@ -37,7 +41,10 @@ namespace mission_6.Controllers
         [HttpPost]
         public IActionResult EnterMovie(ApplicationResponse ar)
         {
-            return View(ar);
+            MovieContext.Add(ar);
+            MovieContext.SaveChanges();
+
+            return View("Index", ar);
         }
 
 
