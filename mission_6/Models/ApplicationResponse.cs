@@ -10,9 +10,6 @@ namespace mission_6.Models
         public int MovieId { get; set; }
 
         [Required]
-        public string Category { get; set; }
-
-        [Required]
         public string Title { get; set; }
 
         [Required]
@@ -30,5 +27,11 @@ namespace mission_6.Models
 
         [MaxLength(25)]
         public string Notes { get; set; }
+
+        //Foreign Key
+        public int CategoryId { get; set; }
+
+        //This creates the relationship from this table to the Category table
+        public Category Category { get; set; }
     }
 }

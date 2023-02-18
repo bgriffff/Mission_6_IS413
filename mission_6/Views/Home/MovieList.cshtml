@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Movie List";
+} 
+
+@model List<ApplicationResponse>
+
+<table class="table table-bordered table-striped">
+
+    <thead class="font-weight-bold thead-dark">
+        <tr>
+            <td>Title</td>
+            <td>Year</td>
+            <td>Director</td>
+            <td>Category</td>
+            <td>Rating</td>
+            <td>Edited</td>
+            <td>Lent To</td>
+            <td>Notes</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @*this is the model Model Pair*@
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td>@x.Title</td>
+                <td>@x.Year</td>
+                <td>@x.Director</td>
+                <td>@x.Category.CategoryName</td>
+                <td>@x.Rating</td>
+                <td>@x.Edited</td>
+                <td>@x.LentTo</td>
+                <td>@x.Notes</td>
+
+                @*sends application id. if you just put an id in the asp-route then it just shows up as the number. This is because we said to do that in the startup.cs file*@
+@*                <td><a asp-controller="Home" asp-action="Edit" asp-route-applicationid="@x.ApplicationId">Edit</a></td>
+                <td><a asp-controller="Home" asp-action="Delete" asp-route-applicationid="@x.ApplicationId">Delete</a></td>*@
+            </tr>
+        }
+    </tbody>
+
+</table>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using mission_6.Models;
 using System;
@@ -11,13 +12,12 @@ namespace mission_6.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
         private MovieApplicationContext MovieContext { get; set; }
 
-        public HomeController(ILogger<HomeController> logger, MovieApplicationContext Movie)
+        //constructor
+        public HomeController(MovieApplicationContext Movie)
         {
-            _logger = logger;
             MovieContext= Movie;
 
         }
@@ -35,6 +35,7 @@ namespace mission_6.Controllers
         [HttpGet]
         public IActionResult EnterMovie()
         {
+            ViewBag.Categories = MovieContext.Categories.ToList();
             return View();
         }
 
@@ -47,12 +48,16 @@ namespace mission_6.Controllers
             return View("Index", ar);
         }
 
-
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult MovieList()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var application = MovieContext.Responses
+                .Include(x => x.Category)
+                .OrderBy(x => x.Title)
+                .ToList();
+
+            return View(application);
         }
+
+
     }
 }
