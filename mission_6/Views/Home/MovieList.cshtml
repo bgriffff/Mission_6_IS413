@@ -34,8 +34,8 @@
                 <td>@x.Notes</td>
 
                 @*sends application id. if you just put an id in the asp-route then it just shows up as the number. This is because we said to do that in the startup.cs file*@
-@*                <td><a asp-controller="Home" asp-action="Edit" asp-route-applicationid="@x.ApplicationId">Edit</a></td>
-                <td><a asp-controller="Home" asp-action="Delete" asp-route-applicationid="@x.ApplicationId">Delete</a></td>*@
+                <td><a asp-controller="Home" asp-action="Edit" asp-route-movieid="@x.MovieId">Edit</a></td>
+                <td><a asp-controller="Home" asp-action="Delete" asp-route-movieid="@x.MovieId">Delete</a></td>
             </tr>
         }
     </tbody>

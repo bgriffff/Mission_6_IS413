@@ -42,12 +42,23 @@ namespace mission_6.Controllers
         [HttpPost]
         public IActionResult EnterMovie(ApplicationResponse ar)
         {
-            MovieContext.Add(ar);
-            MovieContext.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                MovieContext.Add(ar);
+                MovieContext.SaveChanges();
 
-            return View("Index", ar);
+                return RedirectToAction("MovieList", ar);
+            }
+            else // If Invalid
+            {
+                ViewBag.Categories = MovieContext.Categories.ToList();
+
+                return View(ar);
+            }
+
         }
 
+        //SQL statement for Table
         public IActionResult MovieList()
         {
             var application = MovieContext.Responses
@@ -58,6 +69,48 @@ namespace mission_6.Controllers
             return View(application);
         }
 
+        //Edit the entries
+        public IActionResult Edit(int movieid)
+        {
+            ViewBag.Categories = MovieContext.Categories.ToList();
+
+            //find the single record
+            var movie = MovieContext.Responses.Single(x => x.MovieId == movieid);
+
+            return View("EnterMovie", movie);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(ApplicationResponse edit)
+        {
+            MovieContext.Update(edit);
+            MovieContext.SaveChanges();
+
+            // need to send them to the action. not the view
+            return RedirectToAction("MovieList");
+        }
+
+        //Delete Movies
+        [HttpGet]
+        public IActionResult Delete(int movieid)
+        {
+            ViewBag.Categories = MovieContext.Categories.ToList();
+
+            //find the single record
+            var movie = MovieContext.Responses.Single(x => x.MovieId == movieid);
+
+            return View(movie);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(ApplicationResponse delete)
+        {
+            MovieContext.Remove(delete);
+            MovieContext.SaveChanges();
+
+            // need to send them to the action. not the view
+            return RedirectToAction("MovieList");
+        }
 
     }
 }

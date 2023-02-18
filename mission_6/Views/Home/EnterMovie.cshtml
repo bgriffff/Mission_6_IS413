@@ -7,6 +7,8 @@
 <div class="text-center">
     <h1 class="display-4">Enter Movie</h1>
     <form method="post">
+        <div asp-validation-summary="All"></div>
+
         <label asp-for="CategoryId">Category: </label>
         <select asp-for="CategoryId">
             @foreach (Category c in ViewBag.Categories)
@@ -55,8 +57,6 @@
 
 
         <button type="submit">Submit Application</button>
-
-        <div asp-validation-summary="All"></div>
 
     </form>
 </div>
