@@ -70,6 +70,7 @@ namespace mission_6.Controllers
         }
 
         //Edit the entries
+        [HttpGet]
         public IActionResult Edit(int movieid)
         {
             ViewBag.Categories = MovieContext.Categories.ToList();
@@ -83,11 +84,20 @@ namespace mission_6.Controllers
         [HttpPost]
         public IActionResult Edit(ApplicationResponse edit)
         {
-            MovieContext.Update(edit);
-            MovieContext.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                MovieContext.Update(edit);
+                MovieContext.SaveChanges();
 
-            // need to send them to the action. not the view
-            return RedirectToAction("MovieList");
+                // need to send them to the action. not the view
+                return RedirectToAction("MovieList");
+            }
+            else
+            {
+                ViewBag.Categories = MovieContext.Categories.ToList();
+                return View("EnterMovie", edit);
+            }
+            
         }
 
         //Delete Movies
